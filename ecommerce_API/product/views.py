@@ -21,27 +21,28 @@ class Products(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class ProductDetail(APIView):
-    def get_by_id(pk:str):
+    def get_by_id(self, id):
         try:
-            obj = Product.objects.get(id=pk)
+            obj = Product.objects.get(id=id)
+            return obj  # Return the object to use in the get method
         except Product.DoesNotExist:
             raise Http404("Product not found")
         
-    def get(self, request, pk:str):
-        obj = self.get_by_id(id=pk)
-        serializers = ProductSerializer(obj)
-        return Response(serializers.data, status=status.HTTP_200_OK)
+    def get(self, request, id: str):
+        obj = self.get_by_id(id)  # Pass the id directly
+        serializer = ProductSerializer(obj)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
-    def put(self, request,  pk, format=None):
-        product =  self.get_object(id=pk)
+    def put(self, request,  id, format=None):
+        product =  self.get_by_id(id)
         serializer = ProductSerializer(product, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, pk:str):
-        product = Product.objects.get(id=pk)
+    def delete(self, request, id:str):
+        product = self.get_by_id(id)
         product.delete()
         return Response({"message": "Product deleted successfully"}, status=status.HTTP_200_OK)
     
