@@ -1,6 +1,6 @@
 from django.db import models
 from product.models import Product
-from user.models import Customer
+from customer.models import Customer
 import uuid
 
 # Create your models here.
