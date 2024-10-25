@@ -21,7 +21,7 @@ class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=255)
-    price = models.FloatField(ddecimal_places=2)
+    price = models.FloatField()
     product_image = models.ImageField(upload_to='product_image', blank=True, null=True)
     quantity = models.PositiveIntegerField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

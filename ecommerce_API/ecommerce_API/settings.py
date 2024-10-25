@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     # all apps
     'product',
-    'user',
+    'customer',
     'cart',
     'order',
 

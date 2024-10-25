@@ -40,8 +40,8 @@ class ProductImageSerializer(serializers.ModelSerializer):
         return instance
 
 class ProductSerializer(serializers.ModelSerializer):
-    brand = serializers.SlugRelatedField(slug_field='name', queryser=Brand.objects.all())
-    category = serializers.SlugRelatedField(slug_field='name', queryser=Category.objects.all())
+    brand = serializers.SlugRelatedField(slug_field='name', queryset=Brand.objects.all())
+    category = serializers.SlugRelatedField(slug_field='name', queryset=Category.objects.all())
 
     class Meta:
         model = Product
