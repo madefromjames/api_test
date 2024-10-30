@@ -89,13 +89,10 @@ class ProductSearch(APIView):
         return Response("Invalid search query", status=status.HTTP_400_BAD_REQUEST)
     
 class CategoryView(APIView):
-    def post(self, request, format=None):
-        print(f"Incoming request data: {request.data}")  # Debugging line
-        serializers = CategorySerializer(data=request.data)
-        if serializers.is_valid():
-            serializers.save()
-            return Response(serializers.data, status=status.HTTP_201_CREATED)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request):
+        obj = Category.objects.all()
+        serializers = CategorySerializer(obj, many=True)
+        return Response(serializers.errors, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
         serializers = CategorySerializer(data=request.data)

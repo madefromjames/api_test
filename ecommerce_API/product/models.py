@@ -3,14 +3,14 @@ import uuid
 
 # Create your models here.
 class Category(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=55)
 
     def __str__(self):
         return self.name
 
 class Brand(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=55)
     profile_image = models.ImageField(upload_to='brand_image', blank=True, null=True)
 
