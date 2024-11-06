@@ -17,8 +17,8 @@ class CartItemSerializer(serializers.ModelSerializer):
 """POST Serializer"""
 
 class CreateCartSerializer(serializers.ModelSerializer):
-    cart = serializers.SlugField(slug_field='id', queryset=Cart.objects.all())
-    product = serializers.SlugField(slug_field='name', queryset=Product.objects.all())
+    cart = serializers.SlugRelatedField(slug_field='id', queryset=Cart.objects.all())
+    product = serializers.SlugRelatedField(slug_field='name', queryset=Product.objects.all())
 
     class Meta:
         model = CartItem
